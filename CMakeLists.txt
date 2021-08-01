@@ -18,3 +18,9 @@ add_executable(
     LinearList/LinerList.h
     LinearList/SingleLinkedList.cpp
 )
+
+add_executable(
+    DoubleLinkedList
+    LinearList/LinerList.h
+    LinearList/DoubleLinkedList.cpp
+)
