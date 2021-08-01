@@ -50,6 +50,23 @@ class Node {
     }
 };
 
+class DoubleNode {
+  public:
+    int data;
+    DoubleNode *prev, *next;
+
+  
+    
+    DoubleNode() : data(0), next(nullptr), prev(nullptr) {}
+    explicit DoubleNode(int val) : data(val), next(nullptr), prev(nullptr) {}
+    ~DoubleNode() = default;
+
+    friend ostream &operator<<(ostream &out, DoubleNode *n) {
+        out << "{ " << n->data << " }" << endl;
+        return out;
+    }
+};
+
 // template <typename T> void test_DySeqList(LinerList<T> *seqList, T argv[]);
 
 #endif // DATA_STRUCT_LINERLIST_H
