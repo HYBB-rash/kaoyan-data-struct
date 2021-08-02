@@ -45,8 +45,7 @@ int DoubleLinkedList::Length() {
 
 void DoubleLinkedList::ListInsert(int idx, DoubleNode *node) {
     int cnt = 0;
-    for (DoubleNode *p = this->head; p != this->tail;
-         p = p->next, cnt++) {
+    for (DoubleNode *p = this->head; p != this->tail; p = p->next, cnt++) {
         if (cnt == idx - 1) {
             node->next = p->next, node->prev = p;
             p->next->prev = node, p->next = node;
@@ -57,27 +56,41 @@ void DoubleLinkedList::ListInsert(int idx, DoubleNode *node) {
 }
 
 void DoubleLinkedList::PrintList() {
-    cout << this->Length() << ": { " ;
+    cout << "len: " << this->Length() << ": { ";
     for (DoubleNode *p = this->head->next; p != this->tail; p = p->next) {
         cout << p->data << ", ";
     }
     cout << " }\n";
 }
 
-int DoubleLinkedList::LocalElem(DoubleNode *node) { return 0; }
+int DoubleLinkedList::LocalElem(DoubleNode *node) {
+    int cnt = 0;
+    for (auto *p = this->head; p != this->tail; p = p->next, cnt++) {
+        if (p->data == node->data) return cnt;
+    }
+    return Error;
+}
 
-DoubleNode *DoubleLinkedList::GetElem(int idx) { return nullptr; }
+DoubleNode *DoubleLinkedList::GetElem(int idx) {
+    int cnt = 0;
+    for (auto *p = this->head; p != nullptr; p = p->next, cnt++) {
+        if (cnt == idx) return p;
+    }
+    return nullptr;
+}
 
-DoubleNode *DoubleLinkedList::ListDelete(int idx) { return nullptr; }
-
+DoubleNode *DoubleLinkedList::ListDelete(int idx) {
+    auto *pre = this->GetElem(idx - 1), *tar = pre->next;
+    if (pre->next == this->tail || pre == this->tail) return nullptr;
+    pre->next = tar->next;
+    tar->next->prev = pre;
+    return tar;
+}
 
 int main() {
     DoubleLinkedList *doubleLinkedList = new DoubleLinkedList();
-    doubleLinkedList->ListInsert(1, new DoubleNode(2));
-    doubleLinkedList->PrintList();
 
-    doubleLinkedList->ListInsert(2, new DoubleNode(3));
-    doubleLinkedList->PrintList();
+    testList(doubleLinkedList);
 
     return 0;
 }
