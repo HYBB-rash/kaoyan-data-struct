@@ -12,7 +12,7 @@
 
 using namespace std;
 
-class DoubleLinkedList : public LinerList<DoubleNode *> {
+class DoubleLinkedList : public LinkedList<DoubleNode> {
   private:
     DoubleNode *head, *tail;
 
@@ -28,6 +28,9 @@ class DoubleLinkedList : public LinerList<DoubleNode *> {
     void PrintList() override;
 
   public:
+    void InsertByHead(int argv[]) override;
+    void InsertByTail(int argv[]) override;
+    void DeleteItem(DoubleNode *node) override;
 };
 
 DoubleLinkedList::DoubleLinkedList() {
@@ -88,9 +91,34 @@ DoubleNode *DoubleLinkedList::ListDelete(int idx) {
     return tar;
 }
 
+void DoubleLinkedList::InsertByHead(int *argv) {
+    for (int i = 0;; i++) {
+        if (argv[i] == 9999) break;
+        DoubleNode *node = new DoubleNode(argv[i]);
+        node->next = this->head->next, node->prev = this->head;
+        this->head->next->prev = node, this->head->next = node;
+    }
+}
+
+void DoubleLinkedList::InsertByTail(int *argv) {
+    for (int i = 0;; i++) {
+        if (argv[i] == 9999) break;
+        DoubleNode *node = new DoubleNode(argv[i]);
+        node->next = this->tail, node->prev = this->tail->prev;
+        this->tail->prev->next = node, this->tail->prev = node;
+    }
+}
+
+void DoubleLinkedList::DeleteItem(DoubleNode *node) {
+    node->next->prev = node->prev;
+    node->prev->next = node->next;
+    delete node;
+}
+
 int main() {
     DoubleLinkedList *doubleLinkedList = new DoubleLinkedList();
 
+    testLinkedList(doubleLinkedList);
     testList(doubleLinkedList);
 
     return 0;
