@@ -9,7 +9,7 @@
 
 #include <LinearList/LinerList.h>
 
-class SingleLinkedList : public LinerList<Node *> {
+class SingleLinkedList : public LinkedList<Node> {
   private:
     Node *head;
 
@@ -24,9 +24,9 @@ class SingleLinkedList : public LinerList<Node *> {
     void PrintList() override;
 
   public:
-    void InsertByHead(int argv[]);
-    void InsertByTail(int argv[]);
-    void DeleteItem(Node *node);
+    void InsertByHead(int argv[]) override;
+    void InsertByTail(int argv[]) override;
+    void DeleteItem(Node *node) override;
 };
 
 SingleLinkedList::SingleLinkedList() {
@@ -53,7 +53,6 @@ int SingleLinkedList::LocalElem(Node *e) {
 
 Node *SingleLinkedList::GetElem(int idx) {
     int cnt = 0;
-    cout << idx << endl;
     for (Node *p = this->head; p != nullptr; p = p->next, cnt++) {
         if (cnt == idx) return p;
     }
@@ -111,26 +110,19 @@ void SingleLinkedList::InsertByTail(int argv[]) {
     Node *tail = this->head;
     for (int i = 0;; i++) {
         if (argv[i] == 9999) break;
-        Node *valNode = new Node(argv[i]);
-        tail->next = valNode;
+        tail->next = new Node(argv[i]);
         tail = tail->next;
     }
-    delete tail;
+    tail = nullptr;
+    // delete tail;
 }
 
 int main() {
     SingleLinkedList *singleLinkedList = new SingleLinkedList();
-    singleLinkedList->InsertByHead(new int[]{2, 3, 9999});
-    singleLinkedList->PrintList();
 
-    SingleLinkedList *tailSingleLinkedList = new SingleLinkedList();
-    tailSingleLinkedList->InsertByTail(new int[]{5, 6, 7, 8, 9999});
-    tailSingleLinkedList->PrintList(), delete tailSingleLinkedList;
-
-    testList<Node>(singleLinkedList);
-
-    singleLinkedList->DeleteItem(new Node(9));
-    singleLinkedList->PrintList();
-
+    testLinkedList(singleLinkedList);
+    testList(singleLinkedList);
+    
+    
     delete singleLinkedList;
 }
