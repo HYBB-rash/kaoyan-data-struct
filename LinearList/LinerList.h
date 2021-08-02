@@ -109,7 +109,6 @@ template <typename T> void testLinkedList(LinkedList<T> *linkedList) {
     linkedList->PrintList();
     linkedList->DeleteItem(linkedList->GetElem(1));
     linkedList->DeleteItem(linkedList->GetElem(1));
-    linkedList->DeleteItem(linkedList->GetElem(1));
     cout << "Delete item" << endl;
     linkedList->PrintList();
 
