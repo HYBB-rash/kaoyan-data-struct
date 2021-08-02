@@ -80,10 +80,11 @@ DoubleNode *DoubleLinkedList::GetElem(int idx) {
 }
 
 DoubleNode *DoubleLinkedList::ListDelete(int idx) {
-    auto *pre = this->GetElem(idx - 1), *tar = pre->next;
-    if (pre->next == this->tail || pre == this->tail) return nullptr;
-    pre->next = tar->next;
-    tar->next->prev = pre;
+    auto *tar = this->GetElem(idx);
+    if (tar == this->tail || tar == nullptr) return nullptr;
+    tar->prev->next = tar->next;
+    tar->next->prev = tar->prev;
+    tar->next = tar->prev = nullptr;
     return tar;
 }
 
