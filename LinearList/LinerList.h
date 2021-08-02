@@ -55,8 +55,6 @@ class DoubleNode {
     int data;
     DoubleNode *prev, *next;
 
-  
-    
     DoubleNode() : data(0), next(nullptr), prev(nullptr) {}
     explicit DoubleNode(int val) : data(val), next(nullptr), prev(nullptr) {}
     ~DoubleNode() = default;
@@ -67,6 +65,37 @@ class DoubleNode {
     }
 };
 
-// template <typename T> void test_DySeqList(LinerList<T> *seqList, T argv[]);
+template <typename T> void testList(LinerList<T *> *list) {
+    list->ListInsert(1, new T(99));
+    list->PrintList();
+
+    list->ListInsert(1, new T(100));
+    list->PrintList();
+
+    list->ListInsert(3, new T(98));
+    list->PrintList();
+
+    for (int i = 0; i < MaxSize; i++) {
+        list->ListInsert(i + 1, new T(i + 6));
+        list->PrintList();
+    }
+
+    cout << "Find 6's idx:" << list->LocalElem(new T(6)) << endl;
+    cout << "Find 999's idx:" << list->LocalElem(new T(999)) << endl;
+
+    for (int i = 0; i < MaxSize; i++) {
+        auto delVal = list->ListDelete(i + 1);
+        delVal == nullptr ? cout << "error \n"
+                          : cout << "Del val: " << delVal << "\n\n";
+    }
+    list->PrintList();
+
+    list->ListInsert(3, new T(9));
+    list->PrintList();
+
+    list->ListInsert(5, new T(6));
+    list->PrintList();
+    
+}
 
 #endif // DATA_STRUCT_LINERLIST_H
