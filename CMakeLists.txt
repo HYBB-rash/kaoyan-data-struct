@@ -24,3 +24,9 @@ add_executable(
     LinearList/LinerList.h
     LinearList/DoubleLinkedList.cpp
 )
+
+add_executable(
+    CircularList
+    LinearList/LinerList.h
+    LinearList/CircularList.cpp
+)
