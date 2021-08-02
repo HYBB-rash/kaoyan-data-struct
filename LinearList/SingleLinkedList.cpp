@@ -127,33 +127,7 @@ int main() {
     tailSingleLinkedList->InsertByTail(new int[]{5, 6, 7, 8, 9999});
     tailSingleLinkedList->PrintList(), delete tailSingleLinkedList;
 
-    singleLinkedList->ListInsert(1, new Node(99));
-    singleLinkedList->PrintList();
-
-    singleLinkedList->ListInsert(3, new Node(3));
-    singleLinkedList->PrintList();
-
-    for (int i = 0; i < MaxSize; i++) {
-        singleLinkedList->ListInsert(i + 1, new Node(i + 6));
-        singleLinkedList->PrintList();
-    }
-
-    cout << "Find 6' idx:" << singleLinkedList->LocalElem(new Node(6)) << endl;
-    cout << "Find 999's idx:" << singleLinkedList->LocalElem(new Node(999))
-         << endl;
-
-    for (int i = 0; i < MaxSize; i++) {
-        auto DelVal = singleLinkedList->ListDelete(i + 1);
-        DelVal == nullptr ? cout << "error \n"
-                          : cout << "Del val: " << DelVal << "\n\n";
-    }
-    singleLinkedList->PrintList();
-
-    singleLinkedList->ListInsert(3, new Node(9));
-    singleLinkedList->PrintList();
-
-    singleLinkedList->ListInsert(5, new Node(6));
-    singleLinkedList->PrintList();
+    testList<Node>(singleLinkedList);
 
     singleLinkedList->DeleteItem(new Node(9));
     singleLinkedList->PrintList();
