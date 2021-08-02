@@ -32,6 +32,13 @@ template <class T> class LinerList {
     // virtual void DestroyList();
 };
 
+template <class T> class LinkedList : public LinerList<T *> {
+  public:
+    virtual void InsertByHead(int argv[]) = 0;
+    virtual void InsertByTail(int argv[]) = 0;
+    virtual void DeleteItem(T *node) = 0;
+};
+
 class Node {
   public:
     int data;
@@ -95,7 +102,24 @@ template <typename T> void testList(LinerList<T *> *list) {
 
     list->ListInsert(5, new T(6));
     list->PrintList();
-    
+}
+
+template <typename T> void testLinkedList(LinkedList<T> *linkedList) {
+    linkedList->InsertByHead(new int[]{2, 3, 9999});
+    linkedList->PrintList();
+    linkedList->DeleteItem(linkedList->GetElem(1));
+    linkedList->DeleteItem(linkedList->GetElem(1));
+    linkedList->DeleteItem(linkedList->GetElem(1));
+    cout << "Delete item" << endl;
+    linkedList->PrintList();
+
+    linkedList->InsertByTail(new int[]{5, 6, 7, 8, 9999});
+    linkedList->PrintList();
+    linkedList->DeleteItem(linkedList->GetElem(1));
+    linkedList->DeleteItem(linkedList->GetElem(1));
+    linkedList->DeleteItem(linkedList->GetElem(2));
+    cout << "Delete item" << endl;
+    linkedList->PrintList();
 }
 
 #endif // DATA_STRUCT_LINERLIST_H
